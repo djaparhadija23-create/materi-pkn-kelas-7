@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Eksplorasi Modular: Kelahiran Pancasila dalam Sidang BPUPK</title>
+    <style>
+        :root {
+            --primary-50: #eff6ff;
+            --primary-100: #dbeafe;
+            --primary-200: #bfdbfe;
+            --primary-300: #93c5fd;
+            --primary-400: #60a5fa;
+            --primary-500: #3b82f6;
+            --primary-600: #2563eb;
+            --primary-700: #1d4ed8;
+            --primary-800: #1e40af;
+            --primary-900: #1e3a8a;
+            
+            --accent-gold: #f59e0b;
+            --accent-gold-hover: #d97706;
+            --success: #10b981;
+            --danger: #ef4444;
+            --bg-body: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --shadow-sm: 0 2px 4px rgba(37, 99, 235, 0.06);
+            --shadow-md: 0 4px 12px rgba(37, 99, 235, 0.1);
+            --shadow-lg: 0 10px 25px rgba(30, 58, 138, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-700) 60%, var(--primary-600) 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--primary-300), var(--accent-gold));
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .app-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .app-subtitle {
+            font-size: 1rem;
+            opacity: 0.92;
+            max-width: 750px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .nav-tabs-wrapper {
+            background: var(--surface);
+            margin-top: -20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            padding: 8px;
+            margin-bottom: 24px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            border: 1px solid var(--primary-100);
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            padding-bottom: 4px;
+        }
+
+        .tab-btn {
+            flex: 1 0 auto;
+            background: transparent;
+            border: none;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: var(--primary-50);
+            color: var(--primary-700);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-600);
+            color: white;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .module-panel {
+            display: none;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .module-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-100);
+            padding-bottom: 12px;
+        }
+
+        .section-header .icon-box {
+            width: 42px;
+            height: 42px;
+            background: var(--primary-100);
+            color: var(--primary-700);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            color: var(--primary-900);
+            font-weight: 700;
+        }
+
+        .context-banner {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-left: 5px solid var(--primary-600);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .info-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Identity Input Form Styles */
+        .student-identity-card {
+            background: linear-gradient(135deg, var(--primary-50), #ffffff);
+            border: 2px solid var(--primary-200);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--primary-900);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--primary-300);
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-600);
+            box-shadow: 0 0 0 3px var(--primary-100);
+        }
+
+        .quiz-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .quiz-question {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .quiz-question .q-num {
+            background: var(--primary-600);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background: var(--surface);
+            border: 1.5px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            text-align: left;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-dark);
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary-400);
+            background: var(--primary-50);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary-600);
+            background: var(--primary-100);
+        }
+
+        .option-btn.correct {
+            background: #d1fae5 !important;
+            border-color: var(--success) !important;
+            color: #065f46 !important;
+            font-weight: 600;
+        }
+
+        .option-btn.wrong {
+            background: #fee2e2 !important;
+            border-color: var(--danger) !important;
+            color: #991b1b !important;
+        }
+
+        .feedback-box {
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .feedback-box.show {
+            display: block;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .feedback-box.correct {
+            background: #ecfdf5;
+            border: 1px solid #a7f3d0;
+            color: #065f46;
+        }
+
+        .feedback-box.wrong {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+
+        .btn-primary {
+            background: var(--primary-600);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-700);
+            transform: translateY(-1px);
+        }
+
+        .btn-accent {
+            background: var(--accent-gold);
+            color: #1e293b;
+            border: none;
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .score-display-card {
+            background: linear-gradient(135deg, var(--primary-900), var(--primary-700));
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            margin-top: 20px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin: 10px 0;
+        }
+
+        .sync-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .sync-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .sync-badge.success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .sync-badge.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 10px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            width: 4px;
+            background: var(--primary-200);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 24px;
+            cursor: pointer;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 4px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 3px solid var(--primary-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .timeline-item.active .timeline-dot {
+            background: var(--primary-600);
+            color: white;
+            transform: scale(1.15);
+            box-shadow: 0 0 0 4px var(--primary-100);
+        }
+
+        .timeline-content {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-200);
+            border-radius: var(--radius-md);
+            padding: 16px;
+        }
+
+        .tokoh-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tokoh-btn {
+            flex: 1;
+            min-width: 140px;
+            background: var(--surface);
+            border: 2px solid var(--primary-200);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .tokoh-btn.active {
+            border-color: var(--primary-700);
+            background: var(--primary-700);
+            color: white;
+        }
+
+        .proposal-list {
+            list-style-type: none;
+            margin-top: 12px;
+        }
+
+        .proposal-list li {
+            padding: 10px 14px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .proposal-list li span.num {
+            background: var(--primary-600);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .simulation-area {
+            background: #f1f5f9;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            border: 2px dashed var(--primary-300);
+        }
+
+        .drag-items-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            min-height: 80px;
+            padding: 12px;
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .draggable-item {
+            background: var(--primary-100);
+            color: var(--primary-900);
+            border: 1px solid var(--primary-300);
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: grab;
+        }
+
+        .draggable-item.placed {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #e2e8f0;
+        }
+
+        .drop-zones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .drop-zone {
+            background: white;
+            border: 2px solid var(--primary-300);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            min-height: 200px;
+        }
+
+        .drop-zone-header {
+            font-weight: 700;
+            color: var(--primary-800);
+            text-align: center;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--primary-100);
+        }
+
+        .placed-chip {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-300);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .placed-chip button {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @media (max-width: 640px) {
+            .app-title { font-size: 1.4rem; }
+            .module-panel { padding: 1.2rem; }
+            .tokoh-selector { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="container">
+            <span class="header-badge">Modul Pembelajaran Interaktif (MPI) • MTs Kelas VII</span>
+            <h1 class="app-title">Kelahiran Pancasila dalam Sidang BPUPK</h1>
+            <p class="app-subtitle">Eksplorasi Sejarah, Komparasi Gagasan Pendiri Bangsa, & Terhubung Database Google Sheet</p>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top: 10px;">
+        <nav class="nav-tabs-wrapper">
+            <div class="nav-tabs" id="navTabs">
+                <button class="tab-btn active" onclick="switchTab('tab-beranda')">📌 Beranda & Tujuan</button>
+                <button class="tab-btn" onclick="switchTab('tab-modul1')">📜 1. Latar Belakang BPUPK</button>
+                <button class="tab-btn" onclick="switchTab('tab-modul2')">👤 2. Gagasan 3 Tokoh</button>
+                <button class="tab-btn" onclick="switchTab('tab-modul3')">🧩 3. Matriks Komparasi</button>
+                <button class="tab-btn" onclick="switchTab('tab-modul4')">📝 4. Panitia Sembilan</button>
+                <button class="tab-btn" onclick="switchTab('tab-modul5')">🎯 5. Kuis & Evaluasi</button>
+            </div>
+        </nav>
+
+        <main id="tab-beranda" class="module-panel active">
+            <div class="section-header">
+                <div class="icon-box">📌</div>
+                <div>
+                    <h2 class="section-title">Orientasi Pembelajaran & Integrasi Database</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Pendidikan Pancasila — Fase D (Kelas VII MTs)</span>
+                </div>
+            </div>
+
+            <div class="context-banner">
+                <div style="font-size: 1.5rem;">🌊🌴</div>
+                <div>
+                    <strong style="color: var(--primary-900);">Refleksi Kebangsaan dari Pesisir Gorontalo:</strong>
+                    <p style="font-size: 0.92rem; margin-top: 4px;">
+                        Sebagaimana masyarakat Gorontalo gigih berjuang di bawah pimpinan <b>Pahlawan Nasional Nani Wartabone (23 Januari 1942)</b>, pendiri bangsa di BPUPK juga berjuang melalui olah pikir dan musyawarah untuk merumuskan Pancasila.
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary-800); margin-bottom: 12px; font-size: 1.1rem;">🎯 Capaian & Tujuan Pembelajaran:</h3>
+            <div class="card-grid">
+                <div class="info-card">
+                    <h4 style="color: var(--primary-700); margin-bottom: 6px;">1. Latar Belakang BPUPK</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Menjelaskan alasan pembentukan BPUPK oleh Jepang dan dinamika sidang pertamanya.</p>
+                </div>
+                <div class="info-card">
+                    <h4 style="color: var(--primary-700); margin-bottom: 6px;">2. Usulan Dasar Negara</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Mengidentifikasi rumusan oleh Mohammad Yamin, Prof. Soepomo, dan Ir. Soekarno.</p>
+                </div>
+                <div class="info-card">
+                    <h4 style="color: var(--primary-700); margin-bottom: 6px;">3. Komparasi Gagasan</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Menganalisis persamaan dan perbedaan gagasan tokoh melalui matriks interaktif.</p>
+                </div>
+                <div class="info-card">
+                    <h4 style="color: var(--primary-700); margin-bottom: 6px;">4. Evaluasi & Analisis Guru</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Hasil pengerjaan kuis siswa tersimpan otomatis ke database Google Sheet guru.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px; text-align: center;">
+                <button class="btn-primary" onclick="switchTab('tab-modul1')">Mulai Meneroka Modul 1 ➔</button>
+            </div>
+        </main>
+
+        <main id="tab-modul1" class="module-panel">
+            <div class="section-header">
+                <div class="icon-box">📜</div>
+                <div>
+                    <h2 class="section-title">Modul 1: Latar Belakang, Pembentukan, Tugas & Sidang BPUPK</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Eksplorasi Lengkap Sejarah Perjuangan BPUPK (Dokuritsu Junbi Cosakai)</span>
+                </div>
+            </div>
+
+            <!-- Konteks Latar Belakang Sejarah -->
+            <div class="card-grid" style="margin-bottom: 24px;">
+                <div class="info-card">
+                    <h4 style="color: var(--primary-800); margin-bottom: 6px;">1. Terdesaknya Jepang di Perang Pasifik</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        Pada akhir tahun 1944, posisi tentara Jepang semakin terdesak oleh pasukan Sekutu di berbagai pertempuran Pasifik. Untuk menarik simpati dan bantuan rakyat Indonesia, Perdana Menteri Koiso mengumumkan janji kemerdekaan di kemudian hari.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <h4 style="color: var(--primary-800); margin-bottom: 6px;">2. Pengumuman & Pembentukan Resmi</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        Pada <b>1 Maret 1945</b>, Jenderal Kumakichi Harada mengumumkan pembentukan BPUPK (<i>Dokuritsu Junbi Cosakai</i>). Lembaga ini resmi dilantik pada <b>28 Mei 1945</b> di Gedung Chuo Sangi In, Jakarta.
+                    </p>
+                </div>
+                <div class="info-card">
+                    <h4 style="color: var(--primary-800); margin-bottom: 6px;">3. Komposisi Kepengurusan & Anggota</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">
+                        BPUPK diketuai oleh <b>Dr. K.R.T. Radjiman Wedyodiningrat</b> dengan Wakil Ketua <b>Ichibangase Yosio</b> (Jepang) dan <b>R.P. Soeroso</b>. Beranggotakan 62 tokoh perwakilan Indonesia dan 7 orang pengawas Jepang.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tugas Utama BPUPK -->
+            <div style="background: linear-gradient(135deg, var(--primary-100), #ffffff); border: 2px solid var(--primary-300); border-radius: var(--radius-md); padding: 18px; margin-bottom: 24px;">
+                <h3 style="color: var(--primary-900); font-size: 1.1rem; margin-bottom: 8px;">🎯 Tugas Utama BPUPK:</h3>
+                <p style="font-size: 0.93rem; color: var(--text-dark); line-height: 1.6;">
+                    Mempelajari, menyelidiki, dan mempersiapkan hal-hal penting yang berhubungan dengan tata pemerintahan, ekonomi, politik, serta merumuskan dasar negara dan rancangan undang-undang dasar bagi Indonesia merdeka.
+                </p>
+            </div>
+
+            <!-- Rangkaian Sidang BPUPK -->
+            <h3 style="color: var(--primary-900); margin-bottom: 12px; font-size: 1.1rem;">🗓️ Rangkaian Pelaksanaan Sidang BPUPK:</h3>
+            <div class="card-grid" style="margin-bottom: 24px;">
+                <div class="info-card" style="border-left: 4px solid var(--primary-600);">
+                    <span style="background: var(--primary-600); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Sidang Resmi Pertama</span>
+                    <h4 style="color: var(--primary-900); margin-top: 8px;">29 Mei – 1 Juni 1945</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+                        Fokus utama: Membahas dan merumuskan <b>Dasar Negara Indonesia Merdeka</b>. Melahirkan gagasan dari Moh. Yamin, Soepomo, dan pidato Ir. Soekarno (Hari Lahir Pancasila).
+                    </p>
+                </div>
+                <div class="info-card" style="border-left: 4px solid var(--accent-gold);">
+                    <span style="background: var(--accent-gold); color: #1e293b; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Masa Reses (Panitia Sembilan)</span>
+                    <h4 style="color: var(--primary-900); margin-top: 8px;">2 Juni – 9 Juli 1945</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+                        Fokus utama: Membahas usulan dasar negara secara mendalam. Panitia Sembilan berhasil merumuskan <b>Piagam Jakarta (Jakarta Charter)</b> pada 22 Juni 1945.
+                    </p>
+                </div>
+                <div class="info-card" style="border-left: 4px solid var(--primary-800);">
+                    <span style="background: var(--primary-800); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold;">Sidang Resmi Kedua</span>
+                    <h4 style="color: var(--primary-900); margin-top: 8px;">10 Juli – 17 Juli 1945</h4>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 4px;">
+                        Fokus utama: Membahas <b>Rancangan Undang-Undang Dasar (UUD)</b>, bentuk negara, wilayah negara, kewarganegaraan, serta ekonomi dan keuangan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item active" onclick="activateTimeline(this, 't1')">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <span style="background:var(--primary-700); color:white; font-size:0.75rem; padding:2px 8px; border-radius:10px;">1 Maret 1945</span>
+                        <h4 style="color: var(--primary-800); margin-top:4px;">Pengumuman BPUPK</h4>
+                        <p style="font-size: 0.9rem;">Jenderal Kumakichi Harada mengumumkan pembentukan BPUPK (Dokuritsu Junbi Cosakai) saat Jepang terdesak Perang Pasifik.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" onclick="activateTimeline(this, 't2')">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <span style="background:var(--primary-700); color:white; font-size:0.75rem; padding:2px 8px; border-radius:10px;">29 April 1945</span>
+                        <h4 style="color: var(--primary-800); margin-top:4px;">Pembentukan Resmi</h4>
+                        <p style="font-size: 0.9rem;">Dr. K.R.T. Radjiman Wedyodiningrat diangkat sebagai Ketua BPUPK.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" onclick="activateTimeline(this, 't3')">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <span style="background:var(--primary-700); color:white; font-size:0.75rem; padding:2px 8px; border-radius:10px;">28 Mei 1945</span>
+                        <h4 style="color: var(--primary-800); margin-top:4px;">Pelantikan Anggota</h4>
+                        <p style="font-size: 0.9rem;">Pelantikan 62 anggota Indonesia dan 7 pengawas Jepang di Gedung Chuo Sangi In, Jakarta.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item" onclick="activateTimeline(this, 't4')">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-content">
+                        <span style="background:var(--primary-700); color:white; font-size:0.75rem; padding:2px 8px; border-radius:10px;">29 Mei – 1 Juni 1945</span>
+                        <h4 style="color: var(--primary-800); margin-top:4px;">Sidang Pertama</h4>
+                        <p style="font-size: 0.9rem;">Membahas pertanyaan ketua: "Apa dasar negara Indonesia yang akan kita bentuk?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="timeline-detail-box" style="background: var(--primary-50); border: 1px solid var(--primary-300); border-radius: var(--radius-md); padding: 16px;">
+                <strong style="color: var(--primary-900);">💡 Catatan Inti Pedagogis:</strong>
+                <p id="timeline-detail-text" style="font-size: 0.92rem; margin-top: 4px;">
+                    Jepang membentuk BPUPK untuk menarik simpati. Namun pendiri bangsa memanfaatkannya secara cerdas untuk menyiapkan kemerdekaan sejati melalui sidang perumusan dasar negara dan UUD!
+                </p>
+            </div>
+        </main>
+
+        <main id="tab-modul2" class="module-panel">
+            <div class="section-header">
+                <div class="icon-box">👤</div>
+                <div>
+                    <h2 class="section-title">Modul 2: Gagasan Tiga Tokoh Pendiri Bangsa</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Pilih tokoh untuk melihat perincian usulan dasar negara:</span>
+                </div>
+            </div>
+
+            <div class="tokoh-selector">
+                <div class="tokoh-btn active" onclick="showTokoh('yamin', this)">Mohammad Yamin<br><small style="font-weight:400;">(29 Mei 1945)</small></div>
+                <div class="tokoh-btn" onclick="showTokoh('soepomo', this)">Prof. Dr. Soepomo<br><small style="font-weight:400;">(31 Mei 1945)</small></div>
+                <div class="tokoh-btn" onclick="showTokoh('soekarno', this)">Ir. Soekarno<br><small style="font-weight:400;">(1 Juni 1945)</small></div>
+            </div>
+
+            <div id="tokoh-yamin" class="tokoh-card-detail" style="background: var(--primary-50); padding: 20px; border-radius: 12px;">
+                <h3 style="color: var(--primary-900);">Mr. Mohammad Yamin (29 Mei 1945)</h3>
+                <ul class="proposal-list">
+                    <li><span class="num">1</span> Peri Kebangsaan</li>
+                    <li><span class="num">2</span> Peri Kemanusiaan</li>
+                    <li><span class="num">3</span> Peri Ketuhanan</li>
+                    <li><span class="num">4</span> Peri Kerakyatan</li>
+                    <li><span class="num">5</span> Kesejahteraan Rakyat</li>
+                </ul>
+            </div>
+
+            <div id="tokoh-soepomo" class="tokoh-card-detail" style="display:none; background: var(--primary-50); padding: 20px; border-radius: 12px;">
+                <h3 style="color: var(--primary-900);">Prof. Dr. Mr. Soepomo (31 Mei 1945)</h3>
+                <ul class="proposal-list">
+                    <li><span class="num">1</span> Persatuan</li>
+                    <li><span class="num">2</span> Kekeluargaan</li>
+                    <li><span class="num">3</span> Keseimbangan Lahir dan Batin</li>
+                    <li><span class="num">4</span> Musyawarah</li>
+                    <li><span class="num">5</span> Keadilan Rakyat</li>
+                </ul>
+            </div>
+
+            <div id="tokoh-soekarno" class="tokoh-card-detail" style="display:none; background: var(--primary-50); padding: 20px; border-radius: 12px;">
+                <h3 style="color: var(--primary-900);">Ir. Soekarno (1 Juni 1945)</h3>
+                <ul class="proposal-list">
+                    <li><span class="num">1</span> Kebangsaan Indonesia (Nationalisme)</li>
+                    <li><span class="num">2</span> Internasionalisme atau Peri-Kemanusiaan</li>
+                    <li><span class="num">3</span> Mufakat atau Demokrasi</li>
+                    <li><span class="num">4</span> Kesejahteraan Sosial</li>
+                    <li><span class="num">5</span> Ketuhanan yang Berkebudayaan</li>
+                </ul>
+            </div>
+        </main>
+
+        <main id="tab-modul3" class="module-panel">
+            <div class="section-header">
+                <div class="icon-box">🧩</div>
+                <div>
+                    <h2 class="section-title">Modul 3: Matriks Komparasi Gagasan</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Kelompokkan gagasan di bawah ke tokoh pendiri bangsa yang sesuai!</span>
+                </div>
+            </div>
+
+            <div class="simulation-area">
+                <h4 style="color: var(--primary-900); margin-bottom: 8px;">Daftar Gagasan Rumusan (Acak):</h4>
+                <div id="dragItemsPool" class="drag-items-container"></div>
+
+                <div class="drop-zones-grid">
+                    <div class="drop-zone" id="zone-yamin" onclick="handleZoneClick('yamin')">
+                        <div class="drop-zone-header">Mohammad Yamin (29 Mei)</div>
+                        <div id="content-yamin"></div>
+                    </div>
+
+                    <div class="drop-zone" id="zone-soepomo" onclick="handleZoneClick('soepomo')">
+                        <div class="drop-zone-header">Prof. Dr. Soepomo (31 Mei)</div>
+                        <div id="content-soepomo"></div>
+                    </div>
+
+                    <div class="drop-zone" id="zone-soekarno" onclick="handleZoneClick('soekarno')">
+                        <div class="drop-zone-header">Ir. Soekarno (1 Juni)</div>
+                        <div id="content-soekarno"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 16px; display: flex; justify-content: space-between;">
+                    <button class="btn-primary" onclick="checkCategorization()">🔍 Verifikasi Matriks</button>
+                    <button style="background: #e2e8f0; border:none; padding: 8px 16px; border-radius: 6px; cursor:pointer;" onclick="resetCategorization()">🔄 Reset</button>
+                </div>
+                <div id="sim-feedback" class="feedback-box"></div>
+            </div>
+        </main>
+
+        <main id="tab-modul4" class="module-panel">
+            <div class="section-header">
+                <div class="icon-box">📝</div>
+                <div>
+                    <h2 class="section-title">Modul 4: Panitia Sembilan & Piagam Jakarta</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Perjanjian Luhur Tanggal 22 Juni 1945</span>
+                </div>
+            </div>
+            <div class="info-card">
+                <h3 style="color: var(--primary-800);">Hasil Panitia Sembilan</h3>
+                <p style="font-size: 0.95rem; margin-top: 8px;">
+                    Panitia Sembilan menyelaraskan aspirasi Golongan Kebangsaan dan Golongan Islam, menghasilkan kesepakatan <b>Piagam Jakarta (Jakarta Charter)</b> pada 22 Juni 1945. Sila pertama yang semula berbunyi <i>"Ketuhanan dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya"</i> kemudian disempurnakan menjadi <b>"Ketuhanan Yang Maha Esa"</b> demi menjaga persatuan bangsa Indonesia pada 18 Agustus 1945.
+                </p>
+            </div>
+        </main>
+
+        <main id="tab-modul5" class="module-panel">
+            <div class="section-header">
+                <div class="icon-box">🎯</div>
+                <div>
+                    <h2 class="section-title">Modul 5: Kuis Formatif & Evaluasi Terhubung Database</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Lengkapi data diri, selesaikan kuis, dan kirimkan hasil ke spreadsheet guru!</span>
+                </div>
+            </div>
+
+            <!-- Student Identity Input -->
+            <div class="student-identity-card">
+                <h3 style="color: var(--primary-900); margin-bottom: 12px; font-size: 1.1rem;">📋 Identitas Siswa:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+                    <div class="form-group">
+                        <label for="studentName">Nama Lengkap Siswa *</label>
+                        <input type="text" id="studentName" class="form-control" placeholder="Contoh: Mohamad Rahmat" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentClass">Kelas / Rombel *</label>
+                        <input type="text" id="studentClass" class="form-control" placeholder="Contoh: VII-A MTs" required>
+                    </div>
+                </div>
+
+                <!-- Database WebApp Config (Teacher Settings) -->
+                <div style="margin-top: 10px; border-top: 1px dashed var(--primary-300); padding-top: 10px;">
+                    <details>
+                        <summary style="font-size: 0.85rem; color: var(--primary-700); cursor: pointer; font-weight: 600;">⚙️ Pengaturan URL Apps Script (Database Google Sheet Teraplikasi)</summary>
+                        <div style="margin-top: 8px;">
+                            <input type="url" id="webAppUrl" class="form-control" placeholder="Tempelkan URL Web App Google Apps Script di sini..." value="https://script.google.com/macros/s/AKfycbwFZQKbclvxnrYgOYK8guoI_B718JhdxwGk3XfvRL6r-ZaLauw2hvRn13s38_iH2ReT7Q/exec">
+                            <small style="color: var(--text-muted); font-size: 0.8rem;">URL ini sudah terhubung secara otomatis ke Google Sheet backend Anda.</small>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Quiz Questions Container -->
+            <div id="quizContainer"></div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn-primary" id="btnSubmitQuiz" onclick="submitQuiz()" style="font-size: 1.05rem; padding: 12px 30px;">Kirim Jawaban & Simpan ke Database</button>
+            </div>
+
+            <!-- Score Display & Database Sync Status -->
+            <div id="scoreCard" class="score-display-card">
+                <h3>Hasil Evaluasi Formatif Anda</h3>
+                <div class="score-number" id="finalScoreText">0</div>
+                <p id="scoreFeedbackText" style="font-size: 1rem; margin-bottom: 10px;"></p>
+                <div id="syncStatusBadge" class="sync-badge pending">⏳ Memproses simpan ke database...</div>
+                <div style="margin-top: 16px;">
+                    <button class="btn-accent" onclick="resetQuiz()">🔄 Coba Latihan Lagi</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Default Web App URL fallback (connected to active Google Apps Script deployment)
+        let DEFAULT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwFZQKbclvxnrYgOYK8guoI_B718JhdxwGk3XfvRL6r-ZaLauw2hvRn13s38_iH2ReT7Q/exec";
+
+        const quizData = [
+            {
+                id: 1,
+                question: "Apakah tujuan utama dibentuknya BPUPK oleh pemerintah pendudukan Jepang pada 29 April 1945, serta bagaimana para pendiri bangsa memanfaatkannya?",
+                options: [
+                    { key: "A", text: "Untuk memberikan kemerdekaan langsung tanpa syarat kepada rakyat Indonesia." },
+                    { key: "B", text: "Jepang ingin menarik dukungan rakyat Indonesia karena posisi perang terdesak, namun pendiri bangsa menggunakannya untuk menyiapkan dasar negara merdeka." },
+                    { key: "C", text: "Sebagai wadah tentara militer gabungan Indonesia dan Jepang untuk melawan Sekutu." },
+                    { key: "D", text: "Untuk menyusun struktur kabinet pemerintahan Jepang di kawasan Asia Tenggara." }
+                ],
+                correct: "B",
+                explanation: "Tepat! Jepang membentuk BPUPK demi kepentingan perangnya, namun tokoh pendiri bangsa memanfaatkannya untuk meletakkan dasar falsafah negara Indonesia."
+            },
+            {
+                id: 2,
+                question: "Prof. Dr. Soepomo mengusulkan gagasan dasar negara pada 31 Mei 1945. Manakah karakteristik utama dari usulan beliau?",
+                options: [
+                    { key: "A", text: "Menekankan teori perseorangan (individualisme) barat yang bebas mutlak." },
+                    { key: "B", text: "Mengusulkan konsep Trias Politika murni tanpa musyawarah." },
+                    { key: "C", text: "Mengusulkan paham negara integralistik (kekeluargaan) di mana negara menyatu dengan seluruh rakyatnya." },
+                    { key: "D", text: "Menolak asas persatuan dan keadilan sosial dalam struktur pemerintahan." }
+                ],
+                correct: "C",
+                explanation: "Benar! Soepomo menekankan paham Integralistik (negara kekeluargaan) yang menyatu dengan seluruh rakyat."
+            },
+            {
+                id: 3,
+                question: "Mengapa tanggal 1 Juni 1945 diperingati secara historis sebagai Hari Lahir Pancasila?",
+                options: [
+                    { key: "A", text: "Karena pada tanggal tersebut Proklamasi Kemerdekaan Indonesia dikumandangkan." },
+                    { key: "B", text: "Karena pidato Ir. Soekarno pada 1 Juni 1945 secara resmi memperkenalkan nama dan istilah 'Pancasila' sebagai usulan dasar negara." },
+                    { key: "C", text: "Karena Piagam Jakarta secara resmi ditandatangani oleh BPUPK pada tanggal tersebut." },
+                    { key: "D", text: "Karena UUD 1945 disahkan pada tanggal tersebut oleh PPKI." }
+                ],
+                correct: "B",
+                explanation: "Sangat Tepat! Ir. Soekarno menyampaikan pidato memperkenalkan 5 prinsip dan memberikan nama 'Pancasila'."
+            },
+            {
+                id: 4,
+                question: "Apa peran strategis Panitia Sembilan yang dibentuk pada masa reses BPUPK pada 22 Juni 1945?",
+                options: [
+                    { key: "A", text: "Menyusun teks proklamasi kemerdekaan dan memilih presiden." },
+                    { key: "B", text: "Menjembatani dan memusyawarahkan perbedaan antara Golongan Kebangsaan dan Golongan Islam sehingga melahirkan Piagam Jakarta." },
+                    { key: "C", text: "Membubarkan BPUPK dan mendirikan partai politik tunggal." },
+                    { key: "D", text: "Menggalang dana perjuangan masyarakat dari daerah-daerah pesisir." }
+                ],
+                correct: "B",
+                explanation: "Tepat Sekali! Panitia Sembilan menyelaraskan aspirasi Golongan Kebangsaan dan Islam, menghasilkan Piagam Jakarta."
+            },
+            {
+                id: 5,
+                question: "Apabila kita menganalisis usulan Mr. Moh. Yamin, Prof. Soepomo, dan Ir. Soekarno, persamaan mendasar apakah yang terkandung dalam gagasan ketiga tokoh tersebut?",
+                options: [
+                    { key: "A", text: "Ketiganya sepakat mengadopsi sistem kerajaan mutlak." },
+                    { key: "B", text: "Ketiganya sama-sama menekankan asas Ketuhanan, Kemanusiaan, Persatuan/Kebangsaan, dan Musyawarah demi Kesejahteraan Rakyat." },
+                    { key: "C", text: "Ketiganya mengusulkan nama Pancasila sejak hari pertama sidang." },
+                    { key: "D", text: "Ketiganya menghendaki pemisahan total antara etika moral dan pemerintahan." }
+                ],
+                correct: "B",
+                explanation: "Luar biasa! Ketiga tokoh sepakat bahwa Indonesia merdeka harus berlandaskan Ketuhanan, Kemanusiaan, Persatuan, Musyawarah, dan Kesejahteraan Sosial."
+            },
+            {
+                id: 6,
+                question: "Siapakah tokoh yang ditunjuk secara resmi sebagai Ketua BPUPK (Dokuritsu Junbi Cosakai)?",
+                options: [
+                    { key: "A", text: "Ir. Soekarno" },
+                    { key: "B", text: "Mohammad Hatta" },
+                    { key: "C", text: "Dr. K.R.T. Radjiman Wedyodiningrat" },
+                    { key: "D", text: "Ichibangase Yosio" }
+                ],
+                correct: "C",
+                explanation: "Benar! Dr. K.R.T. Radjiman Wedyodiningrat menjabat sebagai Ketua (Kaichou) BPUPK."
+            },
+            {
+                id: 7,
+                question: "Berapakah jumlah komposisi keanggotaan BPUPK saat dilantik pada tanggal 28 Mei 1945?",
+                options: [
+                    { key: "A", text: "62 orang tokoh perwakilan Indonesia dan 7 orang perwakilan Jepang sebagai pengawas." },
+                    { key: "B", text: "9 orang tokoh nasionalis dan 9 orang tokoh agama." },
+                    { key: "C", text: "21 orang perwakilan dari berbagai pulau di Indonesia." },
+                    { key: "D", text: "60 orang perwira militer Jepang dan 7 orang sipil Indonesia." }
+                ],
+                correct: "A",
+                explanation: "Tepat Sekali! BPUPK terdiri dari 62 anggota Indonesia berhak suara dan 7 pengawas Jepang."
+            },
+            {
+                id: 8,
+                question: "Di bawah ini, manakah yang merupakan sebutan bahasa Jepang resmi untuk BPUPK?",
+                options: [
+                    { key: "A", text: "Chuo Sangi In" },
+                    { key: "B", text: "Dokuritsu Junbi Cosakai" },
+                    { key: "C", text: "Dokuritsu Junbi Inkai" },
+                    { key: "D", text: "Hakko Ichiu" }
+                ],
+                correct: "B",
+                explanation: "Benar! BPUPK disebut Dokuritsu Junbi Cosakai, sedangkan PPKI adalah Dokuritsu Junbi Inkai."
+            },
+            {
+                id: 9,
+                question: "Sebelum BPUPK dibentuk, militer Jepang terdesak oleh pasukan Sekutu dalam Perang Pasifik. Apa motif utama Jepang memberikan janji kemerdekaan?",
+                options: [
+                    { key: "A", text: "Menyerahkan seluruh persenjataan kepada pemuda Indonesia." },
+                    { key: "B", text: "Mengakui kesalahan dan kekejaman selama menjajah Asia." },
+                    { key: "C", text: "Menjadikan Indonesia sebagai satu-satunya negara sekutu Jepang." },
+                    { key: "D", text: "Menarik simpati dan dukungan agar rakyat Indonesia bersedia membantu Jepang menghadapi Sekutu." }
+                ],
+                correct: "D",
+                explanation: "Luar biasa! Jepang menjanjikan kemerdekaan untuk menarik simpati rakyat Indonesia dalam Perang Dunia II."
+            },
+            {
+                id: 10,
+                question: "Mengapa rumusan sila pertama Piagam Jakarta disempurnakan menjadi 'Ketuhanan Yang Maha Esa' pada 18 Agustus 1945?",
+                options: [
+                    { key: "A", text: "Karena kalimat awal dinilai terlalu panjang." },
+                    { key: "B", text: "Karena paksaan fisik dari tentara pendudukan Jepang." },
+                    { key: "C", text: "Demi merawat keutuhan NKRI, menghargai keberagaman, dan merangkul masyarakat Indonesia Timur." },
+                    { key: "D", text: "Karena Panitia Sembilan gagal mencapai mufakat." }
+                ],
+                correct: "C",
+                explanation: "Sangat Tepat! Perubahan tersebut adalah wujud jiwa kebesaran pendiri bangsa demi persatuan seluruh elemen NKRI."
+            }
+        ];
+
+        let userAnswers = {};
+
+        const categorizationData = [
+            { id: 'item1', text: 'Peri Kebangsaan', target: 'yamin' },
+            { id: 'item2', text: 'Paham Negara Integralistik', target: 'soepomo' },
+            { id: 'item3', text: 'Kebangsaan Indonesia (Nationalisme)', target: 'soekarno' },
+            { id: 'item4', text: 'Peri Kemanusiaan', target: 'yamin' },
+            { id: 'item5', text: 'Keseimbangan Lahir dan Batin', target: 'soepomo' },
+            { id: 'item6', text: 'Mufakat atau Demokrasi', target: 'soekarno' }
+        ];
+
+        let userCategorization = { yamin: [], soepomo: [], soekarno: [] };
+        let currentSelectedDraggable = null;
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.module-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+            if (activeBtn) activeBtn.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function activateTimeline(el, id) {
+            document.querySelectorAll('.timeline-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function showTokoh(tokohKey, btnElement) {
+            document.querySelectorAll('.tokoh-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            document.getElementById('tokoh-yamin').style.display = 'none';
+            document.getElementById('tokoh-soepomo').style.display = 'none';
+            document.getElementById('tokoh-soekarno').style.display = 'none';
+            document.getElementById('tokoh-' + tokohKey).style.display = 'block';
+        }
+
+        function initCategorizationModule() {
+            const pool = document.getElementById('dragItemsPool');
+            pool.innerHTML = '';
+            categorizationData.forEach(item => {
+                const el = document.createElement('div');
+                el.className = 'draggable-item';
+                el.id = item.id;
+                el.innerHTML = `📌 ${item.text}`;
+                el.onclick = () => {
+                    if (el.classList.contains('placed')) return;
+                    document.querySelectorAll('.draggable-item').forEach(i => i.style.outline = 'none');
+                    el.style.outline = '3px solid var(--primary-600)';
+                    currentSelectedDraggable = item.id;
+                };
+                pool.appendChild(el);
+            });
+        }
+
+        function handleZoneClick(targetZone) {
+            if (currentSelectedDraggable) {
+                placeItemInZone(currentSelectedDraggable, targetZone);
+            }
+        }
+
+        function placeItemInZone(itemId, targetZone) {
+            Object.keys(userCategorization).forEach(z => {
+                userCategorization[z] = userCategorization[z].filter(id => id !== itemId);
+            });
+            userCategorization[targetZone].push(itemId);
+            const dragEl = document.getElementById(itemId);
+            if (dragEl) {
+                dragEl.classList.add('placed');
+                dragEl.style.outline = 'none';
+            }
+            currentSelectedDraggable = null;
+            renderCategorizationZones();
+        }
+
+        function renderCategorizationZones() {
+            ['yamin', 'soepomo', 'soekarno'].forEach(zone => {
+                const container = document.getElementById('content-' + zone);
+                container.innerHTML = '';
+                userCategorization[zone].forEach(itemId => {
+                    const itemData = categorizationData.find(i => i.id === itemId);
+                    const chip = document.createElement('div');
+                    chip.className = 'placed-chip';
+                    chip.innerHTML = `<span>${itemData.text}</span>`;
+                    container.appendChild(chip);
+                });
+            });
+        }
+
+        function checkCategorization() {
+            let correctCount = 0;
+            categorizationData.forEach(item => {
+                if (userCategorization[item.target].includes(item.id)) correctCount++;
+            });
+            const fbBox = document.getElementById('sim-feedback');
+            fbBox.classList.add('show');
+            fbBox.className = 'feedback-box show correct';
+            fbBox.innerHTML = `Hasil verifikasi: ${correctCount}/${categorizationData.length} gagasan tepat!`;
+        }
+
+        function resetCategorization() {
+            userCategorization = { yamin: [], soepomo: [], soekarno: [] };
+            document.querySelectorAll('.draggable-item').forEach(el => el.classList.remove('placed'));
+            renderCategorizationZones();
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+            quizData.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                let optionsHtml = '';
+                q.options.forEach(opt => {
+                    optionsHtml += `
+                        <button class="option-btn" id="q${q.id}_opt${opt.key}" onclick="selectOption(${q.id}, '${opt.key}')">
+                            <span style="font-weight:700; width:22px;">${opt.key}.</span>
+                            <span>${opt.text}</span>
+                        </button>
+                    `;
+                });
+                card.innerHTML = `
+                    <div class="quiz-question">
+                        <span class="q-num">${index + 1}</span>
+                        <div>${q.question}</div>
+                    </div>
+                    <div class="quiz-options">${optionsHtml}</div>
+                    <div class="feedback-box" id="feedback_q${q.id}"></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectOption(questionId, selectedKey) {
+            userAnswers[questionId] = selectedKey;
+            const qData = quizData.find(q => q.id === questionId);
+            qData.options.forEach(opt => {
+                const btn = document.getElementById(`q${questionId}_opt${opt.key}`);
+                if (btn) btn.classList.remove('selected');
+            });
+            const selectedBtn = document.getElementById(`q${questionId}_opt${selectedKey}`);
+            if (selectedBtn) selectedBtn.classList.add('selected');
+        }
+
+        function submitQuiz() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            const classInput = document.getElementById('studentClass').value.trim();
+
+            if (!nameInput || !classInput) {
+                alert("Harap isi Nama Lengkap dan Kelas terlebih dahulu pada bagian Identitas Siswa!");
+                document.getElementById('studentName').focus();
+                return;
+            }
+
+            if (Object.keys(userAnswers).length < quizData.length) {
+                alert(`Harap jawab seluruh ${quizData.length} pertanyaan kuis sebelum mengirimkan jawaban.`);
+                return;
+            }
+
+            let score = 0;
+            let correctCount = 0;
+            let wrongCount = 0;
+            let rawAnswers = [];
+            let detailedAnswersText = [];
+
+            quizData.forEach((q, idx) => {
+                const userAns = userAnswers[q.id];
+                const isCorrect = (userAns === q.correct);
+                
+                if (isCorrect) {
+                    score += 10;
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+
+                rawAnswers.push(userAns || "-");
+                detailedAnswersText.push(`No.${idx+1}: ${userAns} (${isCorrect ? 'Benar' : 'Salah, Kunci: '+q.correct})`);
+
+                const fbBox = document.getElementById(`feedback_q${q.id}`);
+                const correctBtn = document.getElementById(`q${q.id}_opt${q.correct}`);
+                
+                q.options.forEach(opt => {
+                    const btn = document.getElementById(`q${q.id}_opt${opt.key}`);
+                    if (btn) btn.disabled = true;
+                });
+
+                fbBox.classList.add('show');
+                if (isCorrect) {
+                    if (correctBtn) correctBtn.classList.add('correct');
+                    fbBox.className = 'feedback-box show correct';
+                    fbBox.innerHTML = `<b>Jawaban Benar! 🎉</b><br>${q.explanation}`;
+                } else {
+                    const wrongBtn = document.getElementById(`q${q.id}_opt${userAns}`);
+                    if (wrongBtn) wrongBtn.classList.add('wrong');
+                    if (correctBtn) correctBtn.classList.add('correct');
+                    fbBox.className = 'feedback-box show wrong';
+                    fbBox.innerHTML = `<b>Jawaban Kurang Tepat.</b> Kunci: <b>(${q.correct})</b>.<br><i>Penjelasan:</i> ${q.explanation}`;
+                }
+            });
+
+            // Display Score Card UI
+            const scoreCard = document.getElementById('scoreCard');
+            document.getElementById('finalScoreText').innerText = score;
+            document.getElementById('scoreFeedbackText').innerText = score >= 80 ? 
+                "Luar biasa! Pemahaman Anda sangat tinggi." : "Hasil cukup baik. Tingkatkan lagi pemahaman Anda.";
+            scoreCard.style.display = 'block';
+
+            // Send payload to Google Spreadsheet via Apps Script
+            const targetUrl = document.getElementById('webAppUrl').value.trim() || DEFAULT_WEBAPP_URL;
+
+            const payload = {
+                nama: nameInput,
+                kelas: classInput,
+                waktu: new Date().toLocaleString('id-ID'),
+                jumlahBenar: correctCount,
+                jumlahSalah: wrongCount,
+                nilai: score,
+                detailJawabanSummary: detailedAnswersText.join(" | "),
+                rawAnswers: rawAnswers,
+                questions: quizData.map(q => ({
+                    id: q.id,
+                    questionText: q.question,
+                    key: q.correct,
+                    options: q.options.map(o => `${o.key}. ${o.text}`).join(" \n")
+                }))
+            };
+
+            const statusBadge = document.getElementById('syncStatusBadge');
+            
+            if (!targetUrl) {
+                statusBadge.className = "sync-badge error";
+                statusBadge.innerHTML = "⚠️ URL Google Apps Script belum diisi Guru. Hasil hanya tersimpan secara lokal.";
+                scoreCard.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            statusBadge.className = "sync-badge pending";
+            statusBadge.innerHTML = "⏳ Mengirim hasil pengerjaan ke database Google Sheet...";
+
+            // Use fetch with text/plain to prevent CORS preflight issues on Google Apps Script
+            fetch(targetUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    statusBadge.className = "sync-badge success";
+                    statusBadge.innerHTML = "✅ Hasil pengerjaan BERHASIL tersimpan ke database Google Sheet Guru!";
+                } else {
+                    statusBadge.className = "sync-badge error";
+                    statusBadge.innerHTML = "❌ Gagal menyimpan: " + data.message;
+                }
+            })
+            .catch(err => {
+                statusBadge.className = "sync-badge error";
+                statusBadge.innerHTML = "❌ Terjadi kendala koneksi saat menyimpan ke database.";
+            });
+
+            scoreCard.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('scoreCard').style.display = 'none';
+            renderQuiz();
+            window.scrollTo({ top: document.getElementById('tab-modul5').offsetTop, behavior: 'smooth' });
+        }
+
+        window.onload = function() {
+            initCategorizationModule();
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>
